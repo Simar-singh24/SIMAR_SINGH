@@ -110,7 +110,6 @@ const Footer = () => {
         </p>
         <h2 
             className="text-[8vw] md:text-[5vw] font-black leading-[0.9] tracking-tighter uppercase text-white w-fit mx-auto"
-            data-cursor-text="BUILD"
         >
             LET'S BUILD <br /> <span className="text-white/60">THE FUTURE.</span>
         </h2>
@@ -156,7 +155,6 @@ const Footer = () => {
       >
         <h2 
             className="text-[8vw] font-black text-white uppercase tracking-tighter select-none leading-none text-center w-fit mx-auto"
-            data-cursor-text="SIMAR"
         >
             SIMARJOT SINGH
         </h2>

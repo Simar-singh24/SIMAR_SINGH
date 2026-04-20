@@ -32,13 +32,11 @@ const CustomCursor = () => {
         const handleHover = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
             // Only trigger on specific interactive elements or text tags
-            // Allow override if data-cursor-text is explicitly provided
-            const isWord = target.closest('a, button, h1, h2, h3, h4, h5, h6, b, [data-cursor-text]');
+            // EXCLUDE elements inside a footer or with data-no-cursor
             const isNoCursor = target.closest('footer, [data-no-cursor="true"]');
+            const isWord = !isNoCursor && target.closest('a, button, h1, h2, h3, h4, h5, h6, b, [data-cursor-text]');
             
-            const shouldTrigger = isWord && (!isNoCursor || (isWord as HTMLElement).hasAttribute('data-cursor-text'));
-            
-            if (shouldTrigger) {
+            if (isWord) {
                 const text = (isWord as HTMLElement).getAttribute('data-cursor-text');
                 setCursorText(text || "");
                 
