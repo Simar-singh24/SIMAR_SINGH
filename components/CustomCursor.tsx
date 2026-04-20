@@ -1,110 +1,104 @@
 "use client";
+import React, { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
+const CustomCursor = () => {
+    const cursorRef = useRef<HTMLDivElement>(null);
+    const cursorInnerRef = useRef<HTMLDivElement>(null);
+    const [cursorText, setCursorText] = useState("");
 
-export default function CustomCursor() {
-  const blobRef = useRef<HTMLDivElement>(null);
-  const dotRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const cursor = cursorRef.current;
+        const cursorInner = cursorInnerRef.current;
+        if (!cursor || !cursorInner) return;
 
-  useEffect(() => {
-    const blob = blobRef.current;
-    const dot = dotRef.current;
-    if (!blob || !dot) return;
+        // Hide default cursor
+        document.body.style.cursor = 'none';
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let blobX = mouseX;
-    let blobY = mouseY;
+        // Use quickTo for buttery smooth interpolation
+        const xTo = gsap.quickTo(cursor, "x", {duration: 0.6, ease: "power3"});
+        const yTo = gsap.quickTo(cursor, "y", {duration: 0.6, ease: "power3"});
+        
+        const xInnerTo = gsap.quickTo(cursorInner, "x", {duration: 0.15, ease: "power2"});
+        const yInnerTo = gsap.quickTo(cursorInner, "y", {duration: 0.15, ease: "power2"});
 
-    const onMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+        const moveCursor = (e: MouseEvent) => {
+            xTo(e.clientX);
+            yTo(e.clientY);
+            xInnerTo(e.clientX);
+            yInnerTo(e.clientY);
+        };
 
-      // Dot follows instantly
-      gsap.to(dot, {
-        x: mouseX,
-        y: mouseY,
-        duration: 0.05,
-        ease: "none",
-      });
-    };
+        const handleHover = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            // Only trigger on specific interactive elements or text tags
+            // EXCLUDE elements inside a footer or with data-no-cursor
+            const isNoCursor = target.closest('footer, [data-no-cursor="true"]');
+            const isWord = !isNoCursor && target.closest('a, button, h1, h2, h3, h4, h5, h6, b, [data-cursor-text]');
+            
+            if (isWord) {
+                const text = (isWord as HTMLElement).getAttribute('data-cursor-text');
+                setCursorText(text || "");
+                
+                gsap.to(cursor, {
+                    scale: 3.5,
+                    backgroundColor: "white",
+                    mixBlendMode: "difference",
+                    opacity: 1,
+                    duration: 0.3
+                });
+                gsap.to(cursorInner, {
+                    scale: 0,
+                    opacity: 0,
+                    duration: 0.2
+                });
+            } else {
+                setCursorText("");
+                gsap.to(cursor, {
+                    scale: 1,
+                    backgroundColor: "transparent",
+                    mixBlendMode: "normal",
+                    opacity: 0.4, // Subtler on background
+                    duration: 0.3
+                });
+                gsap.to(cursorInner, {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 0.3
+                });
+            }
+        };
 
-    // Smooth blob lag
-    const ticker = gsap.ticker.add(() => {
-      blobX += (mouseX - blobX) * 0.08;
-      blobY += (mouseY - blobY) * 0.08;
-      gsap.set(blob, { x: blobX, y: blobY });
-    });
+        window.addEventListener('mousemove', moveCursor);
+        window.addEventListener('mouseover', handleHover);
 
-    // Scale blob on hover over interactive elements
-    const onEnter = () => {
-      gsap.to(blob, { scale: 1.6, duration: 0.3, ease: "power2.out" });
-    };
-    const onLeave = () => {
-      gsap.to(blob, { scale: 1, duration: 0.3, ease: "power2.out" });
-    };
+        return () => {
+            window.removeEventListener('mousemove', moveCursor);
+            window.removeEventListener('mouseover', handleHover);
+            document.body.style.cursor = 'auto';
+        };
+    }, []);
 
-    const interactiveEls = document.querySelectorAll("a, button, [data-cursor]");
-    interactiveEls.forEach((el) => {
-      el.addEventListener("mouseenter", onEnter);
-      el.addEventListener("mouseleave", onLeave);
-    });
+    return (
+        <>
+            <div 
+                ref={cursorRef}
+                className="fixed top-0 left-0 w-10 h-10 border border-white/50 rounded-full pointer-events-none z-[99999] flex items-center justify-center mix-blend-difference shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+                style={{ transform: 'translate(-50%, -50%)', transition: 'all 0.3s' }}
+            >
+                {cursorText && (
+                    <span className="text-[6px] uppercase font-black text-black tracking-tighter">
+                        {cursorText}
+                    </span>
+                )}
+            </div>
+            <div 
+                ref={cursorInnerRef}
+                className="fixed top-0 left-0 w-2.5 h-2.5 bg-black border-[1.5px] border-white rounded-full pointer-events-none z-[99999] shadow-[0_0_12px_rgba(255,255,255,0.8)]"
+                style={{ transform: 'translate(-50%, -50%)' }}
+            />
+        </>
+    );
+};
 
-    window.addEventListener("mousemove", onMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      gsap.ticker.remove(ticker);
-      interactiveEls.forEach((el) => {
-        el.removeEventListener("mouseenter", onEnter);
-        el.removeEventListener("mouseleave", onLeave);
-      });
-    };
-  }, []);
-
-  return (
-    <>
-      {/* Dark orb blob */}
-      <div
-        ref={blobRef}
-        className="custom-cursor-blob"
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: 72,
-          height: 72,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(10,10,10,0.92) 0%, rgba(30,30,30,0.6) 60%, transparent 100%)",
-          transform: "translate(-50%, -50%)",
-          pointerEvents: "none",
-          zIndex: 99999,
-          mixBlendMode: "normal",
-          backdropFilter: "blur(2px)",
-          border: "1px solid rgba(255,255,255,0.08)",
-          boxShadow: "0 0 40px 8px rgba(0,0,0,0.5)",
-          willChange: "transform",
-        }}
-      />
-      {/* Tiny bright dot in center */}
-      <div
-        ref={dotRef}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: 6,
-          height: 6,
-          borderRadius: "50%",
-          background: "#7ef7e0",
-          transform: "translate(-50%, -50%)",
-          pointerEvents: "none",
-          zIndex: 100000,
-          boxShadow: "0 0 8px 2px #7ef7e0",
-          willChange: "transform",
-        }}
-      />
-    </>
-  );
-}
+export default CustomCursor;

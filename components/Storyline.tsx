@@ -91,7 +91,10 @@ export default function Storyline() {
         <div className="mb-32">
             <h2 className="text-[10px] uppercase tracking-[1em] text-white/30 font-bold mb-6">SELECTED WORKS</h2>
             <div className="h-[2px] w-12 bg-white mb-10" />
-            <h3 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9]">
+            <h3 
+              className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] w-fit"
+              data-cursor-text="WORK"
+            >
                 CRAFTING <br /> DIGITAL <br /> EXCELLENCE.
             </h3>
         </div>

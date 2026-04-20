@@ -50,8 +50,9 @@ export default function Hero() {
         <div className="flex flex-col items-center justify-center w-full pointer-events-auto">
          
           <h1 
-            className="text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 drop-shadow-lg text-center"
+            className="text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 drop-shadow-lg text-center w-fit mx-auto"
             style={{ fontFamily: 'Abhaya Libre, serif' }}
+            data-cursor-text="ROAR"
           >
             FULL STACK DEVELOPER & ML ENGINEER
           </h1>

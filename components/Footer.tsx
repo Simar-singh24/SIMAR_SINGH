@@ -95,7 +95,7 @@ const Footer = () => {
   };
 
   return (
-    <section ref={containerRef} className="relative w-full h-screen bg-black text-white overflow-hidden font-sans">
+    <footer ref={containerRef} className="relative w-full h-screen bg-black text-white overflow-hidden font-sans">
       
       {/* Background Decor - Subtle Grid for ML/Tech feel */}
       <div className="absolute inset-0 z-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
@@ -186,7 +186,7 @@ const Footer = () => {
         <p className="text-[10px] tracking-[0.3em] font-black text-white/20">PUNJAB, INDIA ©2026</p>
       </div>
 
-    </section>
+    </footer>
   );
 };
 

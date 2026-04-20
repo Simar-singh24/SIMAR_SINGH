@@ -242,8 +242,9 @@ const Features = () => {
       <div className="container mx-auto px-3 md:px-10">
         <div className="px-5 py-32 pb-14">
           <AnimatedTitle
-            title="Featured <br /> Projects"
-            containerClass="!text-left justify-start !text-white font-canela font-bold uppercase !text-6xl md:!text-9xl w-full [&>div]:justify-start [&>div]:px-0 mb-2"
+            title="Feat<b>u</b>red <br /> Pr<b>o</b>jects"
+            containerClass="!text-left justify-start !text-white bento-title special-font !text-6xl md:!text-9xl w-fit [&>div]:justify-start [&>div]:px-0 mb-2"
+            data-cursor-text="DISCOVER"
           />
           <p className="max-w-md font-canela text-xl md:text-2xl text-blue-50 opacity-80 mt-4 group-hover:opacity-100 transition-opacity leading-relaxed italic">
             Explore a collection of innovative digital experiences, blending 
@@ -255,6 +256,7 @@ const Features = () => {
         <BentoTilt 
           className="group bento-animate border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]"
           onClick={() => setSelectedProject(projects.devmatch)}
+          data-cursor-text="VIEW"
         >
           <BentoCard
             src={projects.devmatch.src}
@@ -278,6 +280,7 @@ const Features = () => {
           <BentoTilt 
             className="group bento-animate bento-tilt_1 me-14 md:col-span-1 md:me-0"
             onClick={() => setSelectedProject(projects.cinematch)}
+            data-cursor-text="VIEW"
           >
             <BentoCard
               src={projects.cinematch.src}
@@ -289,6 +292,7 @@ const Features = () => {
           <BentoTilt 
             className="group bento-animate bento-tilt_1 md:col-span-1 md:ms-0"
             onClick={() => setSelectedProject(projects.restaurant)}
+            data-cursor-text="VIEW"
           >
             <BentoCard
               src={projects.restaurant.src}
