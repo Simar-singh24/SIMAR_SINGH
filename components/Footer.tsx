@@ -108,7 +108,10 @@ const Footer = () => {
         <p className="text-[10px] md:text-xs uppercase tracking-[0.6em] text-white/40 font-bold mb-8">
             AVAILABLE FOR NEW CHALLENGES
         </p>
-        <h2 className="text-[8vw] md:text-[5vw] font-black leading-[0.9] tracking-tighter uppercase text-white">
+        <h2 
+            className="text-[8vw] md:text-[5vw] font-black leading-[0.9] tracking-tighter uppercase text-white w-fit mx-auto"
+            data-cursor-text="BUILD"
+        >
             LET'S BUILD <br /> <span className="text-white/60">THE FUTURE.</span>
         </h2>
       </div>
@@ -151,7 +154,10 @@ const Footer = () => {
         ref={watermarkRef}
         className="absolute inset-0 z-40 flex flex-col items-center justify-center p-10 pointer-events-none opacity-0"
       >
-        <h2 className="text-[8vw] font-black text-white uppercase tracking-tighter select-none leading-none text-center">
+        <h2 
+            className="text-[8vw] font-black text-white uppercase tracking-tighter select-none leading-none text-center w-fit mx-auto"
+            data-cursor-text="SIMAR"
+        >
             SIMARJOT SINGH
         </h2>
         

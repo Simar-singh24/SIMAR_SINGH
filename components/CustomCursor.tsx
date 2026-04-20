@@ -32,11 +32,13 @@ const CustomCursor = () => {
         const handleHover = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
             // Only trigger on specific interactive elements or text tags
-            // EXCLUDE elements inside a footer or with data-no-cursor
+            // Allow override if data-cursor-text is explicitly provided
+            const isWord = target.closest('a, button, h1, h2, h3, h4, h5, h6, b, [data-cursor-text]');
             const isNoCursor = target.closest('footer, [data-no-cursor="true"]');
-            const isWord = !isNoCursor && target.closest('a, button, h1, h2, h3, h4, h5, h6, b, [data-cursor-text]');
             
-            if (isWord) {
+            const shouldTrigger = isWord && (!isNoCursor || (isWord as HTMLElement).hasAttribute('data-cursor-text'));
+            
+            if (shouldTrigger) {
                 const text = (isWord as HTMLElement).getAttribute('data-cursor-text');
                 setCursorText(text || "");
                 
@@ -84,7 +86,7 @@ const CustomCursor = () => {
             <div 
                 ref={cursorRef}
                 className="fixed top-0 left-0 w-10 h-10 border border-white/50 rounded-full pointer-events-none z-[99999] flex items-center justify-center mix-blend-difference shadow-[0_0_20px_rgba(255,255,255,0.15)]"
-                style={{ transform: 'translate(-50%, -50%)', transition: 'all 0.3s' }}
+                style={{ transform: 'translate(-50%, -50%)', transition: 'all 0.3s', willChange: 'transform' }}
             >
                 {cursorText && (
                     <span className="text-[6px] uppercase font-black text-black tracking-tighter">
@@ -95,7 +97,7 @@ const CustomCursor = () => {
             <div 
                 ref={cursorInnerRef}
                 className="fixed top-0 left-0 w-2.5 h-2.5 bg-black border-[1.5px] border-white rounded-full pointer-events-none z-[99999] shadow-[0_0_12px_rgba(255,255,255,0.8)]"
-                style={{ transform: 'translate(-50%, -50%)' }}
+                style={{ transform: 'translate(-50%, -50%)', willChange: 'transform' }}
             />
         </>
     );
