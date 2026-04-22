@@ -5,23 +5,6 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Simarjot Singh | Portfolio',
   description: 'Full-stack developer integrating machine learning into real-world applications.',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
 }
 
 import SmoothScrollProvider from '@/components/SmoothScrollProvider'
