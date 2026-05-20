@@ -2,10 +2,25 @@
 
 import { useEffect, useRef } from "react";
 import UnicornScene from "unicornstudio-react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    gsap.from(".hero-entrance", {
+      y: 50,
+      opacity: 0,
+      duration: 1.5,
+      stagger: 0.2,
+      ease: "power4.out",
+      delay: 0.5,
+    });
+  }, { scope: containerRef });
+
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-black">
+    <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black">
       {/* Global Style Override to Hide Unicorn Watermark DOM nodes Native to the Library */}
       <style>{`
         a[href*="unicorn.studio"], 
@@ -40,25 +55,27 @@ export default function Hero() {
       {/* Content Overlay */}
       <div className="relative z-10 flex flex-col items-center justify-start pt-24 h-full px-4 pointer-events-none">
         {/* Name and Year - Top Left */}
-        <div className="absolute top-8 left-8">
-          <p className="text-white text-sm font-light tracking-widest">
+        <div className="absolute top-6 left-6 md:top-8 md:left-8 flex items-center gap-4 transition-all duration-500">
+          <p 
+            className="text-white text-[10px] md:text-xs font-medium tracking-[0.6em] uppercase hero-entrance opacity-80"
+            style={{ fontFamily: 'Abhaya Libre, serif' }}
+          >
             SIMARJOT SINGH 19
           </p>
         </div>
 
-        {/* Main Content - Centered */}
-        <div className="flex flex-col items-center justify-center w-full pointer-events-auto">
-         
+        {/* Main Content - Top Aligned */}
+        <div className="flex flex-col items-center justify-start w-full pointer-events-auto">
           <h1 
-            className="text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 drop-shadow-lg text-center w-fit mx-auto"
+            className="text-white text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 drop-shadow-lg text-center w-full max-w-5xl mx-auto leading-[0.9] hero-entrance"
             style={{ fontFamily: 'Abhaya Libre, serif' }}
             data-cursor-text="ROAR"
           >
             FULL STACK DEVELOPER & ML ENGINEER
           </h1>
           
-          <p className="text-gray-200 text-base md:text-lg mb-8 max-w-2xl drop-shadow-md text-center leading-relaxed">
-            Full-stack developer integrating machine learning into real-world applications.
+          <p className="text-gray-300 text-sm md:text-lg mb-8 max-w-2xl drop-shadow-md text-center leading-relaxed hero-entrance px-6">
+            Integrating machine learning into scalable, high-performance applications with cinematic user experiences.
           </p>
         </div>
       </div>

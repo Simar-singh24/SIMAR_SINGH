@@ -84,15 +84,15 @@ export default function Storyline() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="bg-black text-white py-32">
+    <section ref={containerRef} className="bg-black text-white py-16 md:py-32">
       <div className="container mx-auto px-6 md:px-12">
         
         {/* Section Header */}
-        <div className="mb-32">
+        <div className="mb-16 md:mb-32">
             <h2 className="text-[10px] uppercase tracking-[1em] text-white/30 font-bold mb-6">SELECTED WORKS</h2>
             <div className="h-[2px] w-12 bg-white mb-10" />
             <h3 
-              className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] w-fit"
+              className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] w-fit"
               data-cursor-text="WORK"
             >
                 CRAFTING <br /> DIGITAL <br /> EXCELLENCE.
@@ -100,7 +100,7 @@ export default function Storyline() {
         </div>
 
         {/* Project List - Simplified Layout as requested */}
-        <div className="space-y-64">
+        <div className="space-y-24 lg:space-y-64">
           {projects.map((proj, i) => (
             <div 
               key={proj.id} 

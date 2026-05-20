@@ -24,61 +24,117 @@ const Footer = () => {
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=300%",
-        scrub: 1,
-        pin: true,
-      },
+    let mm = gsap.matchMedia();
+
+    // 1. Desktop: Pin and animate 3 phases
+    mm.add("(min-width: 1024px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=300%",
+          scrub: 1,
+          pin: true,
+        },
+      });
+
+      // 1. Main Headline Animation (Light color -> Appear -> Fade out)
+      tl.fromTo(headlineRef.current, 
+          { opacity: 0.1, scale: 0.9, y: 50 },
+          { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power2.out" }
+      );
+      
+      tl.to(headlineRef.current, {
+          opacity: 0,
+          y: -100,
+          scale: 1.1,
+          duration: 1,
+          ease: "power1.in"
+      }, "+=0.5");
+
+      // 2. Social List Entrance
+      tl.fromTo(socialListRef.current, 
+          { opacity: 0, y: 150 },
+          { opacity: 1, y: 0, duration: 1.5, ease: "power3.out" },
+          "-=0.5"
+      );
+
+      // Stagger divider lines expansion
+      const lines = socialListRef.current?.querySelectorAll(".social-divider");
+      if (lines) {
+          tl.from(lines, {
+              scaleX: 0,
+              stagger: 0.1,
+              duration: 1,
+              transformOrigin: "left center"
+          }, "-=1");
+      }
+
+      // 3. Watermark Appearance
+      tl.to(socialListRef.current, {
+          opacity: 0,
+          scale: 0.9,
+          duration: 1,
+          ease: "power2.in"
+      });
+
+      tl.fromTo(watermarkRef.current, 
+          { opacity: 0.1, y: 100 },
+          { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" },
+          "-=0.5"
+      );
     });
 
-    // 1. Main Headline Animation (Light color -> Appear -> Fade out)
-    tl.fromTo(headlineRef.current, 
-        { opacity: 0.1, scale: 0.9, y: 50 },
-        { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power2.out" }
-    );
-    
-    tl.to(headlineRef.current, {
-        opacity: 0,
-        y: -100,
-        scale: 1.1,
-        duration: 1,
-        ease: "power1.in"
-    }, "+=0.5");
+    // 2. Mobile & Tablet: Natural stacked flow with simple triggers
+    mm.add("(max-width: 1023px)", () => {
+      // Headline reveal
+      gsap.fromTo(headlineRef.current,
+        { opacity: 0.3, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: headlineRef.current,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          }
+        }
+      );
 
-    // 2. Social List Entrance (The "Same to Same" UI from the reference)
-    tl.fromTo(socialListRef.current, 
-        { opacity: 0, y: 150 },
-        { opacity: 1, y: 0, duration: 1.5, ease: "power3.out" },
-        "-=0.5"
-    );
+      // Social list reveal
+      gsap.fromTo(socialListRef.current,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: socialListRef.current,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          }
+        }
+      );
 
-    // Stagger divider lines expansion
-    const lines = socialListRef.current?.querySelectorAll(".social-divider");
-    if (lines) {
-        tl.from(lines, {
-            scaleX: 0,
-            stagger: 0.1,
-            duration: 1,
-            transformOrigin: "left center"
-        }, "-=1");
-    }
-
-    // 3. Watermark Appearance
-    tl.to(socialListRef.current, {
-        opacity: 0,
-        scale: 0.9,
-        duration: 1,
-        ease: "power2.in"
+      // Watermark list reveal
+      gsap.fromTo(watermarkRef.current,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: watermarkRef.current,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          }
+        }
+      );
     });
-
-    tl.fromTo(watermarkRef.current, 
-        { opacity: 0.1, y: 100 },
-        { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" },
-        "-=0.5"
-    );
 
     // Badge Rotation
     gsap.to(".portfolio-badge-rotate", {
@@ -88,6 +144,7 @@ const Footer = () => {
         ease: "none"
     });
 
+    return () => mm.revert();
   }, { scope: containerRef });
 
   const scrollToTop = () => {
@@ -95,7 +152,7 @@ const Footer = () => {
   };
 
   return (
-    <footer ref={containerRef} className="relative w-full h-screen bg-black text-white overflow-hidden font-sans">
+    <footer ref={containerRef} className="relative w-full h-auto lg:h-screen bg-black text-white overflow-hidden font-sans">
       
       {/* Background Decor - Subtle Grid for ML/Tech feel */}
       <div className="absolute inset-0 z-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
@@ -103,13 +160,13 @@ const Footer = () => {
       {/* Phase 1: High-Fidelity Headline */}
       <div 
         ref={headlineRef}
-        className="absolute inset-0 z-20 flex flex-col items-center justify-center p-10 text-center"
+        className="relative min-h-[50vh] lg:absolute lg:inset-0 z-20 flex flex-col items-center justify-center p-6 lg:p-10 text-center"
       >
         <p className="text-[10px] md:text-xs uppercase tracking-[0.6em] text-white/40 font-bold mb-8">
             AVAILABLE FOR NEW CHALLENGES
         </p>
         <h2 
-            className="text-[8vw] md:text-[5vw] font-black leading-[0.9] tracking-tighter uppercase text-white w-fit mx-auto"
+            className="text-4xl sm:text-5xl lg:text-[5vw] font-black leading-[0.9] tracking-tighter uppercase text-white w-fit mx-auto"
         >
             LET'S BUILD <br /> <span className="text-white/60">THE FUTURE.</span>
         </h2>
@@ -118,7 +175,7 @@ const Footer = () => {
       {/* Phase 2: Social Links (The "Footer Folder" UI Structure) */}
       <div 
         ref={socialListRef}
-        className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none opacity-0"
+        className="relative py-16 lg:absolute lg:inset-0 z-30 flex items-center justify-center pointer-events-auto lg:pointer-events-none opacity-100 lg:opacity-0"
       >
         <div className="w-full max-w-5xl px-8 pointer-events-auto">
             <div className="mb-16 md:mb-24">
@@ -133,12 +190,12 @@ const Footer = () => {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between py-6 md:py-10 px-4 hover:bg-white/[0.02] transition-colors"
+                        className="flex items-center justify-between py-4 md:py-10 px-4 hover:bg-white/[0.02] transition-colors"
                     >
-                        <span className="text-3xl md:text-5xl font-light text-white group-hover:text-white group-hover:pl-4 transition-all duration-500">
+                        <span className="text-xl md:text-5xl font-light text-white group-hover:text-white group-hover:pl-4 transition-all duration-500">
                             {link.label}
                         </span>
-                        <div className="text-2xl md:text-4xl text-white group-hover:text-white transition-all group-hover:scale-125">
+                        <div className="text-xl md:text-4xl text-white group-hover:text-white transition-all group-hover:scale-125">
                             {link.icon}
                         </div>
                     </a>
@@ -151,15 +208,15 @@ const Footer = () => {
       {/* Phase 3: Final Watermark & Info */}
       <div 
         ref={watermarkRef}
-        className="absolute inset-0 z-40 flex flex-col items-center justify-center p-10 pointer-events-none opacity-0"
+        className="relative py-16 pb-28 lg:pb-16 lg:absolute lg:inset-0 z-40 flex flex-col items-center justify-center p-6 lg:p-10 pointer-events-auto lg:pointer-events-none opacity-100 lg:opacity-0"
       >
         <h2 
-            className="text-[8vw] font-black text-white uppercase tracking-tighter select-none leading-none text-center w-fit mx-auto"
+            className="text-4xl sm:text-6xl lg:text-[8vw] font-black text-white uppercase tracking-tighter select-none leading-none text-center w-fit mx-auto"
         >
             SIMARJOT SINGH
         </h2>
         
-        <div className="mt-20 w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left pointer-events-auto">
+        <div className="mt-10 md:mt-20 w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-left pointer-events-auto">
             <div>
                 <p className="text-[10px] uppercase tracking-widest text-white/40 mb-4">Contact</p>
                 <a href="mailto:baljeetsimarsingh@gmail.com" className="text-lg md:text-xl font-medium hover:text-blue-400 transition-colors block mb-1">baljeetsimarsingh@gmail.com</a>
@@ -176,8 +233,12 @@ const Footer = () => {
                     className="group relative flex items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full border border-white/20 hover:border-white transition-all"
                  >
                     <FaArrowUp className="text-2xl group-hover:-translate-y-2 transition-transform" />
-                    <div className="portfolio-badge-rotate absolute inset-0 text-[10px]">
-                        {/* Circle Text SVG would go here, using a simpler visual representation */}
+                    <div className="portfolio-badge-rotate absolute inset-0">
+                        <img 
+                          src="/logo.png" 
+                          alt="Badge Logo" 
+                          className="w-full h-full object-contain p-4 opacity-40 group-hover:opacity-100 transition-opacity"
+                        />
                         <div className="w-full h-full border border-dashed border-white/10 rounded-full animate-spin-slow" />
                     </div>
                  </button>
@@ -186,7 +247,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Footer Detail */}
-      <div className="absolute bottom-10 left-10 z-50">
+      <div className="absolute bottom-4 left-6 md:bottom-10 md:left-10 z-50">
         <p className="text-[10px] tracking-[0.3em] font-black text-white/20">PUNJAB, INDIA ©2026</p>
       </div>
 

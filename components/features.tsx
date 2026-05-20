@@ -27,7 +27,7 @@ const ProjectModal = ({ project, onClose }: { project: ProjectDetail | null, onC
         className="absolute inset-0 bg-black/80 backdrop-blur-md"
         onClick={onClose}
       />
-      <div className="relative w-full max-w-4xl overflow-hidden rounded-3xl border border-white/20 bg-neutral-900 shadow-2xl transition-all duration-500 animate-in zoom-in-95 fade-in">
+      <div className="relative w-full max-w-4xl overflow-y-auto max-h-[90vh] md:overflow-hidden rounded-3xl border border-white/20 bg-neutral-900 shadow-2xl transition-all duration-500 animate-in zoom-in-95 fade-in">
         <button 
           onClick={onClose}
           className="absolute right-6 top-6 z-[110] rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
@@ -43,7 +43,7 @@ const ProjectModal = ({ project, onClose }: { project: ProjectDetail | null, onC
               className="size-full object-cover"
             />
           </div>
-          <div className="flex flex-col justify-center p-8 md:p-12">
+          <div className="flex flex-col justify-center p-8 md:p-12 text-white">
             <h2 className="special-font text-4xl font-black text-white md:text-6xl mb-6">
               {project.title.replace(/<b>|<\/b>/g, '')}
             </h2>
@@ -267,8 +267,8 @@ const Features = () => {
         </BentoTilt>
 
         {/* Grid */}
-        <div className="grid h-[135vh] grid-cols-2 grid-rows-3 gap-7">
-          <BentoTilt className="group bento-animate bento-tilt_2 row-span-1 md:col-span-1 md:row-span-2">
+        <div className="grid h-auto md:h-[135vh] grid-cols-1 md:grid-cols-2 grid-rows-none md:grid-rows-3 gap-7">
+          <BentoTilt className="group bento-animate bento-tilt_2 h-80 md:h-full row-span-1 md:col-span-1 md:row-span-2">
             <div className="flex size-full flex-col justify-between bg-black p-5 text-white rounded-md overflow-hidden border border-white/10">
               <h1 className="bento-title special-font max-w-64 text-white">
                 M<b>o</b>re co<b>m</b>ing s<b>o</b>on!
@@ -278,7 +278,7 @@ const Features = () => {
           </BentoTilt>
 
           <BentoTilt 
-            className="group bento-animate bento-tilt_1 me-14 md:col-span-1 md:me-0"
+            className="group bento-animate bento-tilt_1 h-80 md:h-full md:col-span-1"
             onClick={() => setSelectedProject(projects.cinematch)}
             data-cursor-text="VIEW"
           >
@@ -290,7 +290,7 @@ const Features = () => {
           </BentoTilt>
 
           <BentoTilt 
-            className="group bento-animate bento-tilt_1 md:col-span-1 md:ms-0"
+            className="group bento-animate bento-tilt_1 h-80 md:h-full md:col-span-1 md:ms-0"
             onClick={() => setSelectedProject(projects.restaurant)}
             data-cursor-text="VIEW"
           >
@@ -302,7 +302,7 @@ const Features = () => {
           </BentoTilt>
 
           <BentoTilt 
-            className="group bento-animate bento-tilt_1 col-span-2"
+            className="group bento-animate bento-tilt_1 h-80 md:h-full col-span-1 md:col-span-2"
             onClick={() => setSelectedProject(projects.cocktail)}
           >
             <BentoCard

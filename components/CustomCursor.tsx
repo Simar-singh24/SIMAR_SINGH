@@ -12,6 +12,13 @@ const CustomCursor = () => {
         const cursorInner = cursorInnerRef.current;
         if (!cursor || !cursorInner) return;
 
+        // If touch device or screen is small, don't execute custom cursor logic
+        const isTouchOrSmall = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 1024;
+        if (isTouchOrSmall) {
+            document.body.style.cursor = 'auto';
+            return;
+        }
+
         // Hide default cursor
         document.body.style.cursor = 'none';
 
@@ -83,7 +90,7 @@ const CustomCursor = () => {
         <>
             <div 
                 ref={cursorRef}
-                className="fixed top-0 left-0 w-10 h-10 border border-white/50 rounded-full pointer-events-none z-[99999] flex items-center justify-center mix-blend-difference shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+                className="hidden lg:flex fixed top-0 left-0 w-10 h-10 border border-white/50 rounded-full pointer-events-none z-[99999] items-center justify-center mix-blend-difference shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                 style={{ transform: 'translate(-50%, -50%)', transition: 'all 0.3s', willChange: 'transform' }}
             >
                 {cursorText && (
@@ -94,7 +101,7 @@ const CustomCursor = () => {
             </div>
             <div 
                 ref={cursorInnerRef}
-                className="fixed top-0 left-0 w-2.5 h-2.5 bg-black border-[1.5px] border-white rounded-full pointer-events-none z-[99999] shadow-[0_0_12px_rgba(255,255,255,0.8)]"
+                className="hidden lg:block fixed top-0 left-0 w-2.5 h-2.5 bg-black border-[1.5px] border-white rounded-full pointer-events-none z-[99999] shadow-[0_0_12px_rgba(255,255,255,0.8)]"
                 style={{ transform: 'translate(-50%, -50%)', willChange: 'transform' }}
             />
         </>
