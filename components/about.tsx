@@ -129,7 +129,7 @@ const About = () => {
 
       <div className="h-auto min-h-screen lg:h-dvh w-full relative flex flex-col items-center justify-start py-12 px-6 lg:block lg:py-0 lg:px-0" id="clip">
         {/* Masked image that expands based on GSAP */}
-        <div className="mask-clip-path w-full max-w-md h-64 md:h-80 lg:w-96 lg:h-96 rounded-2xl lg:rounded-[50px] overflow-hidden relative lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-[1] shadow-2xl mb-8 lg:mb-0">
+        <div className="mask-clip-path w-full max-w-md lg:max-w-none h-64 md:h-80 lg:w-96 lg:h-96 rounded-2xl lg:rounded-[50px] overflow-hidden relative lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-[1] shadow-2xl mb-8 lg:mb-0">
           <img
             src="/img/about.jpg"
             alt="About Me Background"
