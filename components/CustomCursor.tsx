@@ -91,7 +91,7 @@ const CustomCursor = () => {
             <div 
                 ref={cursorRef}
                 className="hidden lg:flex fixed top-0 left-0 w-10 h-10 border border-white/50 rounded-full pointer-events-none z-[99999] items-center justify-center mix-blend-difference shadow-[0_0_20px_rgba(255,255,255,0.15)]"
-                style={{ transform: 'translate(-50%, -50%)', transition: 'all 0.3s', willChange: 'transform' }}
+                style={{ transform: 'translate(-50%, -50%)', willChange: 'transform' }}
             >
                 {cursorText && (
                     <span className="text-[6px] uppercase font-black text-black tracking-tighter">

@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import Image from "next/image";
 import AnimatedTitle from "./AnimatedTitle";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -117,6 +118,7 @@ const About = () => {
         </h2>
 
         <AnimatedTitle  
+          as="h2"
           title={`Integrating <b>M</b>achine <br /> L<b>e</b>arning into Reality`}
           containerClass="mt-5 text-center text-4xl uppercase leading-[0.8] md:text-[6rem]"
         />
@@ -130,9 +132,12 @@ const About = () => {
       <div className="h-auto min-h-screen lg:h-dvh w-full relative flex flex-col items-center justify-start py-12 px-6 lg:block lg:py-0 lg:px-0" id="clip">
         {/* Masked image that expands based on GSAP */}
         <div className="mask-clip-path w-full max-w-md lg:max-w-none h-64 md:h-80 lg:w-96 lg:h-96 rounded-2xl lg:rounded-[50px] overflow-hidden relative lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-[1] shadow-2xl mb-8 lg:mb-0">
-          <img
+          <Image
             src="/img/about.jpg"
             alt="About Me Background"
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            priority
             className="absolute left-0 top-0 w-full h-full object-cover"
           />
           {/* Enhanced cinematic dark overlay for premium readability */}
@@ -141,11 +146,11 @@ const About = () => {
 
         {/* About Me Text Layer - Focus on fitting the frame elegantly */}
         <div className="about-me-text-container relative w-full max-w-3xl lg:absolute lg:inset-0 z-10 flex flex-col justify-start lg:justify-center items-start p-2 sm:p-4 lg:p-24 pointer-events-auto lg:pointer-events-none h-auto lg:h-full lg:max-w-6xl lg:left-0 drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] font-canela">
-           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 flex flex-wrap gap-x-3 text-white uppercase tracking-tight">
+           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 flex flex-wrap gap-x-3 text-white uppercase tracking-tight">
               {"About Me (Tech-Focused, High Impact)".split(" ").map((word, i) => (
                 <span key={i} className="about-me-word opacity-0 inline-block translate-y-[100px]">{word}</span>
               ))}
-           </h1>
+           </h2>
            
            <div className="space-y-4 md:space-y-6 text-sm md:text-lg lg:text-xl leading-relaxed text-white pr-4 max-w-4xl">
               <div className="flex flex-wrap gap-x-2">

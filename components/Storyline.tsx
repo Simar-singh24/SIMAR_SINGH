@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -89,14 +90,14 @@ export default function Storyline() {
         
         {/* Section Header */}
         <div className="mb-16 md:mb-32">
-            <h2 className="text-[10px] uppercase tracking-[1em] text-white/30 font-bold mb-6">SELECTED WORKS</h2>
+            <p className="text-[10px] uppercase tracking-[1em] text-white/30 font-bold mb-6">SELECTED WORKS</p>
             <div className="h-[2px] w-12 bg-white mb-10" />
-            <h3 
+            <h2 
               className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] w-fit"
               data-cursor-text="WORK"
             >
                 CRAFTING <br /> DIGITAL <br /> EXCELLENCE.
-            </h3>
+            </h2>
         </div>
 
         {/* Project List - Simplified Layout as requested */}
@@ -106,17 +107,18 @@ export default function Storyline() {
               key={proj.id} 
               className="project-card grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center"
             >
-              {/* Image Column */}
               <div className={`relative aspect-[16/10] overflow-hidden group rounded-lg ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="project-image w-full h-full">
-                  <img 
-                    src={proj.src} 
+                <div className="project-image w-full h-full relative">
+                  <Image 
+                    src={`/${proj.src}`} 
                     alt={proj.title} 
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {/* Color Overlay */}
                   <div 
-                    className="absolute inset-0 mix-blend-multiply opacity-20 transition-opacity group-hover:opacity-10"
+                    className="absolute inset-0 mix-blend-multiply opacity-20 transition-opacity group-hover:opacity-10 z-[2]"
                     style={{ backgroundColor: proj.hexColor }}
                   ></div>
                 </div>

@@ -2,29 +2,37 @@
 
 import { useEffect, ReactNode } from "react";
 import Lenis from "lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const SmoothScrollProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.8,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1.1,
-      touchMultiplier: 2,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5,
       infinite: false,
     });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    // Synchronize Lenis scrolling with GSAP ScrollTrigger
+    lenis.on("scroll", ScrollTrigger.update);
 
-    requestAnimationFrame(raf);
+    // Use GSAP ticker instead of separate requestAnimationFrame loop
+    const updateTick = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+    gsap.ticker.add(updateTick);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
       lenis.destroy();
+      gsap.ticker.remove(updateTick);
     };
   }, []);
 

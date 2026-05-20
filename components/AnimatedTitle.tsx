@@ -7,8 +7,18 @@ import clsx from "clsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const AnimatedTitle = ({ title, containerClass, ...props }: { title: string, containerClass?: string, [key: string]: any }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+const AnimatedTitle = ({ 
+  title, 
+  containerClass, 
+  as: Component = "div", 
+  ...props 
+}: { 
+  title: string, 
+  containerClass?: string, 
+  as?: React.ElementType, 
+  [key: string]: any 
+}) => {
+  const containerRef = useRef<any>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -37,7 +47,7 @@ const AnimatedTitle = ({ title, containerClass, ...props }: { title: string, con
   }, []);
 
   return (
-    <div 
+    <Component 
       ref={containerRef} 
       className={clsx("animated-title", containerClass)}
       {...props}
@@ -57,7 +67,7 @@ const AnimatedTitle = ({ title, containerClass, ...props }: { title: string, con
           ))}
         </div>
       ))}
-    </div>
+    </Component>
   );
 };
 

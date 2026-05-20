@@ -6,6 +6,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
 import AnimatedTitle from './AnimatedTitle';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -36,11 +37,13 @@ const ProjectModal = ({ project, onClose }: { project: ProjectDetail | null, onC
         </button>
 
         <div className="grid md:grid-cols-2">
-          <div className="h-64 w-full md:h-full">
-            <img 
-              src={project.src} 
+          <div className="h-64 w-full md:h-full relative overflow-hidden">
+            <Image 
+              src={`/${project.src}`} 
               alt={project.title}
-              className="size-full object-cover"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
             />
           </div>
           <div className="flex flex-col justify-center p-8 md:p-12 text-white">
@@ -128,8 +131,10 @@ const BentoCard = ({ src, title, description, isVideo = false, imageClassName = 
           className={`absolute left-0 top-0 size-full ${imageClassName}`}
         />
       ) : (
-        <img
-          src={src}
+        <Image
+          src={`/${src}`}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
           className={`absolute left-0 top-0 size-full ${imageClassName}`}
           alt={typeof title === 'string' ? title : 'Project Image'}
         />
@@ -242,6 +247,7 @@ const Features = () => {
       <div className="container mx-auto px-3 md:px-10">
         <div className="px-5 py-32 pb-14">
           <AnimatedTitle
+            as="h2"
             title="Feat<b>u</b>red <br /> Pr<b>o</b>jects"
             containerClass="!text-left justify-start !text-white bento-title special-font !text-6xl md:!text-9xl w-fit [&>div]:justify-start [&>div]:px-0 mb-2"
             data-cursor-text="DISCOVER"
