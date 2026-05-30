@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import UnicornScene from "unicornstudio-react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import ResponsiveContainer from "./ResponsiveContainer";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,8 +20,8 @@ export default function Hero() {
     });
   }, { scope: containerRef });
 
-  return (
-    <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black">
+  return (<ResponsiveContainer>
+    <section ref={containerRef} className="relative w-full min-h-screen sm:min-h-[80vh] md:min-h-[90vh] lg:h-screen overflow-hidden bg-black">
       {/* Global Style Override to Hide Unicorn Watermark DOM nodes Native to the Library */}
       <style>{`
         a[href*="unicorn.studio"], 
@@ -96,6 +97,6 @@ export default function Hero() {
           />
         </svg>
       </div>
-    </section>
+    </ResponsiveContainer></section>
   );
 }
