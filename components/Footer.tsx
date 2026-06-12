@@ -158,97 +158,97 @@ const Footer = () => {
       <div className="absolute inset-0 z-0 opacity-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
       {/* Phase 1: High-Fidelity Headline */}
-      <div 
+      <div
         ref={headlineRef}
-        className="relative min-h-[50vh] lg:absolute lg:inset-0 z-20 flex flex-col items-center justify-center p-6 lg:p-10 text-center"
+        className="relative min-h-[40vh] sm:min-h-[45vh] md:min-h-[50vh] lg:absolute lg:inset-0 z-20 flex flex-col items-center justify-center p-4 sm:p-6 lg:p-10 text-center"
       >
-        <p className="text-[10px] md:text-xs uppercase tracking-[0.6em] text-white/40 font-bold mb-8">
-            AVAILABLE FOR NEW CHALLENGES
+        <p className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-[0.5em] sm:tracking-[0.6em] text-white/40 font-bold mb-6 sm:mb-8">
+          AVAILABLE FOR NEW CHALLENGES
         </p>
-        <h2 
-            className="text-4xl sm:text-5xl lg:text-[5vw] font-black leading-[0.9] tracking-tighter uppercase text-white w-fit mx-auto"
+        <h2
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-[5vw] font-black leading-[0.9] tracking-tighter uppercase text-white w-fit mx-auto"
         >
-            LET'S BUILD <br /> <span className="text-white/60">THE FUTURE.</span>
+          LET'S BUILD <br /> <span className="text-white/60">THE FUTURE.</span>
         </h2>
       </div>
 
       {/* Phase 2: Social Links (The "Footer Folder" UI Structure) */}
-      <div 
+      <div
         ref={socialListRef}
-        className="relative py-16 lg:absolute lg:inset-0 z-30 flex items-center justify-center pointer-events-auto lg:pointer-events-none opacity-100 lg:opacity-0"
+        className="relative py-12 sm:py-16 lg:absolute lg:inset-0 z-30 flex items-center justify-center pointer-events-auto lg:pointer-events-none opacity-100 lg:opacity-0"
       >
-        <div className="w-full max-w-5xl px-8 pointer-events-auto">
-            <div className="mb-16 md:mb-24">
-                <p className="text-xs uppercase tracking-widest text-white/30 mb-2">Connect with me</p>
-                <div className="h-[2px] w-12 bg-white" />
-            </div>
-            
-            {socialLinks.map((link, i) => (
-                <div key={i} className="group transition-all">
-                    <div className="social-divider h-[1px] w-full bg-white/10" />
-                    <a 
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-between py-4 md:py-10 px-4 hover:bg-white/[0.02] transition-colors"
-                    >
-                        <span className="text-xl md:text-5xl font-light text-white group-hover:text-white group-hover:pl-4 transition-all duration-500">
-                            {link.label}
-                        </span>
-                        <div className="text-xl md:text-4xl text-white group-hover:text-white transition-all group-hover:scale-125">
-                            {link.icon}
-                        </div>
-                    </a>
+        <div className="w-full max-w-5xl px-4 sm:px-8 pointer-events-auto">
+          <div className="mb-10 sm:mb-16 md:mb-24">
+            <p className="text-[9px] sm:text-xs uppercase tracking-widest text-white/30 mb-2">Connect with me</p>
+            <div className="h-[2px] w-10 sm:w-12 bg-white" />
+          </div>
+
+          {socialLinks.map((link, i) => (
+            <div key={i} className="group transition-all">
+              <div className="social-divider h-[1px] w-full bg-white/10" />
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between py-3 sm:py-4 md:py-10 px-2 sm:px-4 hover:bg-white/[0.02] transition-colors"
+              >
+                <span className="text-base sm:text-2xl md:text-5xl font-light text-white group-hover:text-white group-hover:pl-2 sm:group-hover:pl-4 transition-all duration-500">
+                  {link.label}
+                </span>
+                <div className="text-lg sm:text-2xl md:text-4xl text-white group-hover:text-white transition-all group-hover:scale-125">
+                  {link.icon}
                 </div>
-            ))}
-            <div className="social-divider h-[1px] w-full bg-white/10" />
+              </a>
+            </div>
+          ))}
+          <div className="social-divider h-[1px] w-full bg-white/10" />
         </div>
       </div>
 
       {/* Phase 3: Final Watermark & Info */}
-      <div 
+      <div
         ref={watermarkRef}
-        className="relative py-16 pb-28 lg:pb-16 lg:absolute lg:inset-0 z-40 flex flex-col items-center justify-center p-6 lg:p-10 pointer-events-auto lg:pointer-events-none opacity-100 lg:opacity-0"
+        className="relative py-12 sm:py-16 pb-20 sm:pb-24 md:pb-28 lg:pb-16 lg:absolute lg:inset-0 z-40 flex flex-col items-center justify-center p-4 sm:p-6 lg:p-10 pointer-events-auto lg:pointer-events-none opacity-100 lg:opacity-0"
       >
-        <h2 
-            className="text-4xl sm:text-6xl lg:text-[8vw] font-black text-white uppercase tracking-tighter select-none leading-none text-center w-fit mx-auto"
+        <h2
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-[8vw] font-black text-white uppercase tracking-tighter select-none leading-none text-center w-fit mx-auto"
         >
-            SIMARJOT SINGH
+          SIMARJOT SINGH
         </h2>
-        
-        <div className="mt-10 md:mt-20 w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-left pointer-events-auto">
-            <div>
-                <p className="text-[10px] uppercase tracking-widest text-white/40 mb-4">Contact</p>
-                <a href="mailto:baljeetsimarsingh@gmail.com" className="text-lg md:text-xl font-medium hover:text-blue-400 transition-colors block mb-1">baljeetsimarsingh@gmail.com</a>
-                <p className="text-lg md:text-xl font-medium text-white/70">+91 9555197836</p>
-            </div>
-            <div>
-                <p className="text-[10px] uppercase tracking-widest text-white/40 mb-4">Profile</p>
-                <p className="text-lg md:text-xl font-medium">Full Stack & ML</p>
-                <p className="text-sm text-white/40 mt-1">Age: 19 Years</p>
-            </div>
-            <div className="flex flex-col items-center md:items-end justify-center">
-                 <button 
-                    onClick={scrollToTop}
-                    className="group relative flex items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full border border-white/20 hover:border-white transition-all"
-                 >
-                    <FaArrowUp className="text-2xl group-hover:-translate-y-2 transition-transform" />
-                    <div className="portfolio-badge-rotate absolute inset-0">
-                        <img 
-                          src="/logo.png" 
-                          alt="Badge Logo" 
-                          className="w-full h-full object-contain p-4 opacity-40 group-hover:opacity-100 transition-opacity"
-                        />
-                        <div className="w-full h-full border border-dashed border-white/10 rounded-full animate-spin-slow" />
-                    </div>
-                 </button>
-            </div>
+
+        <div className="mt-6 sm:mt-10 md:mt-20 w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12 text-center md:text-left pointer-events-auto px-2 sm:px-4">
+          <div>
+            <p className="text-[8px] sm:text-[10px] uppercase tracking-widest text-white/40 mb-2 sm:mb-4">Contact</p>
+            <a href="mailto:baljeetsimarsingh@gmail.com" className="text-sm sm:text-base md:text-lg lg:text-xl font-medium hover:text-blue-400 transition-colors block mb-1">baljeetsimarsingh@gmail.com</a>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-white/70">+91 9555197836</p>
+          </div>
+          <div>
+            <p className="text-[8px] sm:text-[10px] uppercase tracking-widest text-white/40 mb-2 sm:mb-4">Profile</p>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium">Full Stack & ML</p>
+            <p className="text-xs sm:text-sm text-white/40 mt-1">Age: 19 Years</p>
+          </div>
+          <div className="flex flex-col items-center md:items-end justify-center">
+            <button
+              onClick={scrollToTop}
+              className="group relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 rounded-full border border-white/20 hover:border-white transition-all"
+            >
+              <FaArrowUp className="text-lg sm:text-2xl group-hover:-translate-y-2 transition-transform" />
+              <div className="portfolio-badge-rotate absolute inset-0">
+                <img
+                  src="/logo.png"
+                  alt="Badge Logo"
+                  className="w-full h-full object-contain p-3 sm:p-4 opacity-40 group-hover:opacity-100 transition-opacity"
+                />
+                <div className="w-full h-full border border-dashed border-white/10 rounded-full animate-spin-slow" />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Bottom Footer Detail */}
-      <div className="absolute bottom-4 left-6 md:bottom-10 md:left-10 z-50">
-        <p className="text-[10px] tracking-[0.3em] font-black text-white/20">PUNJAB, INDIA ©2026</p>
+      <div className="absolute bottom-2 left-4 sm:bottom-4 md:bottom-10 md:left-10 z-50">
+        <p className="text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] font-black text-white/20">PUNJAB, INDIA ©2026</p>
       </div>
 
     </footer>
