@@ -20,12 +20,10 @@ const SmoothScrollProvider = ({ children }: { children: ReactNode }) => {
       infinite: false,
     });
 
-    // Synchronize Lenis scrolling with GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
-    // Use GSAP ticker instead of separate requestAnimationFrame loop
     const updateTick = (time: number) => {
-      lenis.raf(time * 1000);
+      lenis.raf(time);
     };
     gsap.ticker.add(updateTick);
     gsap.ticker.lagSmoothing(0);
