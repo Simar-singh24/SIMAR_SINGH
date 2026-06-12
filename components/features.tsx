@@ -23,42 +23,42 @@ const ProjectModal = ({ project, onClose }: { project: ProjectDetail | null, onC
   if (!project) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      <div 
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-6">
+      <div
         className="absolute inset-0 bg-black/80 backdrop-blur-md"
         onClick={onClose}
       />
-      <div className="relative w-full max-w-4xl overflow-y-auto max-h-[90vh] md:overflow-hidden rounded-3xl border border-white/20 bg-neutral-900 shadow-2xl transition-all duration-500 animate-in zoom-in-95 fade-in">
-        <button 
+      <div className="relative w-full max-w-4xl overflow-y-auto max-h-[90vh] md:overflow-hidden rounded-2xl sm:rounded-3xl border border-white/20 bg-neutral-900 shadow-2xl transition-all duration-500 animate-in zoom-in-95 fade-in">
+        <button
           onClick={onClose}
-          className="absolute right-6 top-6 z-[110] rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
+          className="absolute right-4 sm:right-6 top-4 sm:top-6 z-[110] rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
         >
           <IoCloseOutline size={24} />
         </button>
 
         <div className="grid md:grid-cols-2">
-          <div className="h-64 w-full md:h-full relative overflow-hidden">
-            <Image 
-              src={`/${project.src}`} 
+          <div className="h-48 sm:h-56 md:h-full w-full relative overflow-hidden">
+            <Image
+              src={`/${project.src}`}
               alt={project.title}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
           </div>
-          <div className="flex flex-col justify-center p-8 md:p-12 text-white">
-            <h2 className="special-font text-4xl font-black text-white md:text-6xl mb-6">
+          <div className="flex flex-col justify-center p-4 sm:p-6 md:p-12 text-white">
+            <h2 className="special-font text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black text-white mb-4 md:mb-6">
               {project.title.replace(/<b>|<\/b>/g, '')}
             </h2>
-            <p className="text-lg text-blue-50/70 leading-relaxed mb-8">
+            <p className="text-sm sm:text-base md:text-lg text-blue-50/70 leading-relaxed mb-6 md:mb-8">
               {project.longDescription}
             </p>
             {project.github && (
-              <a 
+              <a
                 href={project.github}
                 target="_blank"
                 rel="noreferrer"
-                className="w-fit rounded-full bg-white px-6 py-3 text-black font-bold uppercase tracking-wider hover:bg-neutral-200 transition-colors"
+                className="w-fit rounded-full bg-white px-4 sm:px-6 py-2 sm:py-3 text-black font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-neutral-200 transition-colors"
                 onClick={(e) => e.stopPropagation()}
               >
                 View on GitHub
@@ -134,16 +134,16 @@ const BentoCard = ({ src, title, description, isVideo = false, imageClassName = 
         <Image
           src={`/${src}`}
           fill
-          sizes="(max-width: 768px) 100vw, 50vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className={`absolute left-0 top-0 size-full ${imageClassName}`}
           alt={typeof title === 'string' ? title : 'Project Image'}
         />
       )}
-      <div className="relative z-10 flex size-full flex-col justify-between p-5 text-blue-50">
+      <div className="relative z-10 flex size-full flex-col justify-between p-3 sm:p-4 md:p-5 text-blue-50">
         <div>
-          <h1 className="text-xl md:text-2xl font-black uppercase tracking-[0.2em] drop-shadow-md">{title}</h1>
+          <h1 className="text-sm sm:text-base md:text-lg lg:text-2xl font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] drop-shadow-md">{title}</h1>
           {description && (
-            <p className="mt-3 max-w-64 text-xs md:text-sm bg-black/40 backdrop-blur-sm p-3 rounded-lg border border-white/10 opacity-70 group-hover:opacity-100 transition-opacity">
+            <p className="mt-2 sm:mt-3 max-w-64 text-xs sm:text-xs md:text-sm bg-black/40 backdrop-blur-sm p-2 sm:p-3 rounded-lg border border-white/10 opacity-70 group-hover:opacity-100 transition-opacity">
               {description}
             </p>
           )}
@@ -238,29 +238,28 @@ const Features = () => {
   };
 
   return (
-    <section className="bg-black min-h-screen">
-      <ProjectModal 
-        project={selectedProject} 
-        onClose={() => setSelectedProject(null)} 
+    <section className="w-full bg-black min-h-screen">
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
       />
-      
-      <div className="container mx-auto px-3 md:px-10">
-        <div className="px-5 py-32 pb-14">
+
+      <div className="w-full px-3 sm:px-4 md:px-6 lg:px-10">
+        <div className="px-2 sm:px-3 md:px-5 py-8 sm:py-12 md:py-20 lg:py-32 pb-6 sm:pb-8 md:pb-10">
           <AnimatedTitle
             as="h2"
             title="Feat<b>u</b>red <br /> Pr<b>o</b>jects"
-            containerClass="!text-left justify-start !text-white bento-title special-font !text-6xl md:!text-9xl w-fit [&>div]:justify-start [&>div]:px-0 mb-2"
+            containerClass="!text-left justify-start !text-white special-font !text-2xl sm:!text-3xl md:!text-5xl lg:!text-7xl xl:!text-8xl w-fit [&>div]:justify-start [&>div]:px-0 mb-3 sm:mb-4 md:mb-5"
             data-cursor-text="DISCOVER"
           />
-          <p className="max-w-md font-canela text-xl md:text-2xl text-blue-50 opacity-80 mt-4 group-hover:opacity-100 transition-opacity leading-relaxed italic">
-            Explore a collection of innovative digital experiences, blending 
-            cutting-edge technology with cinematic storytelling.
+          <p className="max-w-md font-canela text-xs sm:text-sm md:text-lg lg:text-xl text-blue-50 opacity-80 mt-2 sm:mt-3 md:mt-4 leading-relaxed italic">
+            Explore a collection of innovative digital experiences.
           </p>
         </div>
 
         {/* Major Project */}
-        <BentoTilt 
-          className="group bento-animate border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]"
+        <BentoTilt
+          className="group bento-animate border-hsla relative mb-3 sm:mb-4 md:mb-6 lg:mb-8 h-48 sm:h-56 md:h-72 lg:h-[65vh] w-full overflow-hidden rounded-md"
           onClick={() => setSelectedProject(projects.devmatch)}
           data-cursor-text="VIEW"
         >
@@ -272,19 +271,19 @@ const Features = () => {
           />
         </BentoTilt>
 
-        {/* Grid */}
-        <div className="grid h-auto md:h-[135vh] grid-cols-1 md:grid-cols-2 grid-rows-none md:grid-rows-3 gap-7">
-          <BentoTilt className="group bento-animate bento-tilt_2 h-80 md:h-full row-span-1 md:col-span-1 md:row-span-2">
-            <div className="flex size-full flex-col justify-between bg-black p-5 text-white rounded-md overflow-hidden border border-white/10">
-              <h1 className="bento-title special-font max-w-64 text-white">
+        {/* Grid - Mobile: Stack, Tablet/Desktop: Grid */}
+        <div className="flex flex-col lg:grid lg:grid-cols-2 lg:grid-rows-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+          <BentoTilt className="group bento-animate bento-tilt_2 h-48 sm:h-56 md:h-64 lg:h-full lg:row-span-2 lg:col-span-1 order-4 md:order-1">
+            <div className="flex size-full flex-col justify-between bg-black p-3 sm:p-4 md:p-5 text-white rounded-md overflow-hidden border border-white/10">
+              <h1 className="special-font max-w-48 text-white text-lg sm:text-xl md:text-3xl lg:text-5xl xl:text-6xl font-bold">
                 M<b>o</b>re co<b>m</b>ing s<b>o</b>on!
               </h1>
-              <TiLocationArrow className="m-5 scale-[5] self-end text-white/50" />
+              <TiLocationArrow className="scale-3 sm:scale-3 md:scale-4 lg:scale-5 self-end text-white/50" />
             </div>
           </BentoTilt>
 
-          <BentoTilt 
-            className="group bento-animate bento-tilt_1 h-80 md:h-full md:col-span-1"
+          <BentoTilt
+            className="group bento-animate bento-tilt_1 h-48 sm:h-56 md:h-64 lg:h-full order-1 md:order-2"
             onClick={() => setSelectedProject(projects.cinematch)}
             data-cursor-text="VIEW"
           >
@@ -295,8 +294,8 @@ const Features = () => {
             />
           </BentoTilt>
 
-          <BentoTilt 
-            className="group bento-animate bento-tilt_1 h-80 md:h-full md:col-span-1 md:ms-0"
+          <BentoTilt
+            className="group bento-animate bento-tilt_1 h-48 sm:h-56 md:h-64 lg:h-full order-2 md:order-3"
             onClick={() => setSelectedProject(projects.restaurant)}
             data-cursor-text="VIEW"
           >
@@ -307,8 +306,8 @@ const Features = () => {
             />
           </BentoTilt>
 
-          <BentoTilt 
-            className="group bento-animate bento-tilt_1 h-80 md:h-full col-span-1 md:col-span-2"
+          <BentoTilt
+            className="group bento-animate bento-tilt_1 h-48 sm:h-56 md:h-64 lg:h-full order-3 md:order-4 lg:col-span-2"
             onClick={() => setSelectedProject(projects.cocktail)}
           >
             <BentoCard
