@@ -111,32 +111,32 @@ const About = () => {
   }, { scope: containerRef });
 
   return (
-    <div id="about" className="min-h-screen w-full" ref={containerRef}>
-      <div className="relative mb-8 mt-36 flex flex-col items-center gap-5">
-        <h2 className="font-general text-sm uppercase md:text-[10px]">
-          Welcome to Simarjot Singh's portfolio
+    <div id="about" className="w-full min-h-screen bg-black text-white" ref={containerRef}>
+      <div className="relative mb-8 sm:mb-12 md:mb-16 mt-8 sm:mt-12 md:mt-20 flex flex-col items-center gap-3 sm:gap-4 md:gap-5 px-4 sm:px-6">
+        <h2 className="font-general text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-wider">
+          Welcome to portfolio
         </h2>
 
-        <AnimatedTitle  
+        <AnimatedTitle
           as="h2"
           title={`Integrating <b>M</b>achine <br /> L<b>e</b>arning into Reality`}
-          containerClass="mt-5 text-center text-4xl uppercase leading-[0.8] md:text-[6rem]"
+          containerClass="mt-3 sm:mt-5 text-center text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl uppercase leading-[0.9] font-bold"
         />
 
-        <div className="about-subtext max-w-2xl text-center">
-          <p>I build scalable platforms and integrate intelligent models.</p>
-          <p>Passionate about UI/UX and resilient system architecture.</p>
+        <div className="about-subtext max-w-2xl text-center px-4 sm:px-6 mt-4">
+          <p className="text-[11px] sm:text-sm md:text-base leading-relaxed text-white/80">I build scalable platforms and integrate intelligent models.</p>
+          <p className="text-[11px] sm:text-sm md:text-base leading-relaxed text-white/80 mt-2">Passionate about UI/UX and resilient system architecture.</p>
         </div>
       </div>
 
-      <div className="h-auto min-h-screen lg:h-dvh w-full relative flex flex-col items-center justify-start py-12 px-6 lg:block lg:py-0 lg:px-0" id="clip">
+      <div className="w-full min-h-screen lg:h-dvh relative flex flex-col items-center justify-start py-8 sm:py-12 md:py-16 lg:py-0 px-4 sm:px-6 md:px-8 lg:block lg:px-0 bg-black" id="clip">
         {/* Masked image that expands based on GSAP */}
-        <div className="mask-clip-path w-full max-w-md lg:max-w-none h-64 md:h-80 lg:w-96 lg:h-96 rounded-2xl lg:rounded-[50px] overflow-hidden relative lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-[1] shadow-2xl mb-8 lg:mb-0">
+        <div className="mask-clip-path w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-none h-40 sm:h-48 md:h-64 lg:h-96 rounded-lg sm:rounded-xl md:rounded-2xl lg:rounded-[50px] overflow-hidden relative lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-[1] shadow-lg sm:shadow-xl md:shadow-2xl mb-6 sm:mb-8 md:mb-10 lg:mb-0">
           <Image
             src="/img/about.jpg"
             alt="About Me Background"
             fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 85vw, 50vw"
             priority
             className="absolute left-0 top-0 w-full h-full object-cover"
           />
@@ -145,44 +145,44 @@ const About = () => {
         </div>
 
         {/* About Me Text Layer - Focus on fitting the frame elegantly */}
-        <div className="about-me-text-container relative w-full max-w-3xl lg:absolute lg:inset-0 z-10 flex flex-col justify-start lg:justify-center items-start p-2 sm:p-4 lg:p-24 pointer-events-auto lg:pointer-events-none h-auto lg:h-full lg:max-w-6xl lg:left-0 drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] font-canela">
-           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 flex flex-wrap gap-x-3 text-white uppercase tracking-tight">
-              {"About Me (Tech-Focused, High Impact)".split(" ").map((word, i) => (
+        <div className="about-me-text-container relative w-full max-w-3xl lg:absolute lg:inset-0 z-10 flex flex-col justify-start lg:justify-center items-start p-3 sm:p-4 md:p-6 lg:p-24 pointer-events-auto lg:pointer-events-none h-auto lg:h-full lg:max-w-6xl lg:left-0 drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] font-canela">
+          <h2 className="text-lg sm:text-xl md:text-3xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 md:mb-6 flex flex-wrap gap-x-2 sm:gap-x-3 text-white uppercase tracking-tight">
+            {"About Me".split(" ").map((word, i) => (
+              <span key={i} className="about-me-word opacity-0 inline-block translate-y-[100px]">{word}</span>
+            ))}
+          </h2>
+
+          <div className="space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-6 text-[10px] sm:text-xs md:text-base lg:text-lg xl:text-xl leading-relaxed text-white/90 pr-2 sm:pr-3 md:pr-4 max-w-4xl">
+            <div className="flex flex-wrap gap-x-1 sm:gap-x-2">
+              {"I am a Full Stack Developer and Machine Learning Engineer focused on building scalable, high-performance, and AI-powered applications.".split(" ").map((word, i) => (
                 <span key={i} className="about-me-word opacity-0 inline-block translate-y-[100px]">{word}</span>
               ))}
-           </h2>
-           
-           <div className="space-y-4 md:space-y-6 text-sm md:text-lg lg:text-xl leading-relaxed text-white pr-4 max-w-4xl">
-              <div className="flex flex-wrap gap-x-2">
-                {"I am a Full Stack Developer and Machine Learning Engineer focused on building scalable, high-performance, and AI-powered applications.".split(" ").map((word, i) => (
-                  <span key={i} className="about-me-word opacity-0 inline-block translate-y-[100px]">{word}</span>
-                ))}
-              </div>
-              
-              <div className="flex flex-wrap gap-x-2 opacity-90">
-                {"I work across modern web technologies including React, Next.js (App Router), Tailwind CSS, GSAP, Three.js (3D/WebGL), and Framer Motion to create immersive, interactive user experiences. On the backend, I use FastAPI, Node.js, and RESTful APIs to develop efficient, production-ready systems.".split(" ").map((word, i) => (
-                  <span key={i} className="about-me-word opacity-0 inline-block translate-y-[100px]">{word}</span>
-                ))}
-              </div>
+            </div>
 
-              <div className="flex flex-wrap gap-x-2 opacity-90">
-                {"I have strong expertise in Python for Machine Learning, working with libraries like NumPy, Pandas, Scikit-learn, and TensorFlow/PyTorch, and I integrate ML models into real-world applications using FastAPI-based APIs.".split(" ").map((word, i) => (
-                  <span key={i} className="about-me-word opacity-0 inline-block translate-y-[100px]">{word}</span>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-x-1 sm:gap-x-2 opacity-90">
+              {"I work with React, Next.js, Tailwind CSS, GSAP, Three.js, and Framer Motion for interactive experiences. Backend: FastAPI, Node.js, and RESTful APIs.".split(" ").map((word, i) => (
+                <span key={i} className="about-me-word opacity-0 inline-block translate-y-[100px]">{word}</span>
+              ))}
+            </div>
 
-              <div className="flex flex-wrap gap-x-2 opacity-90">
-                {"I am also experienced with data pipelines, model deployment, and real-time data handling, along with tools like Git, GitHub, Docker (basics), and cloud fundamentals (AWS/GCP basics).".split(" ").map((word, i) => (
-                  <span key={i} className="about-me-word opacity-0 inline-block translate-y-[100px]">{word}</span>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-x-1 sm:gap-x-2 opacity-90">
+              {"Strong expertise in Python for ML with NumPy, Pandas, Scikit-learn, and TensorFlow/PyTorch. I integrate ML models into real-world applications via FastAPI APIs.".split(" ").map((word, i) => (
+                <span key={i} className="about-me-word opacity-0 inline-block translate-y-[100px]">{word}</span>
+              ))}
+            </div>
 
-              <div className="flex flex-wrap gap-x-2 font-bold italic mt-4 md:mt-6 text-white border-l-2 border-white/30 pl-4 md:pl-6 leading-snug">
-                {"My focus is on combining modern frontend engineering + backend architecture + AI/ML systems to build intelligent, scalable, and visually advanced digital products.".split(" ").map((word, i) => (
-                  <span key={i} className="about-me-word opacity-0 inline-block translate-y-[100px]">{word}</span>
-                ))}
-              </div>
-           </div>
+            <div className="flex flex-wrap gap-x-1 sm:gap-x-2 opacity-90">
+              {"Data pipelines, model deployment, real-time data handling, Git, GitHub, Docker basics, and cloud fundamentals with AWS/GCP.".split(" ").map((word, i) => (
+                <span key={i} className="about-me-word opacity-0 inline-block translate-y-[100px]">{word}</span>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-x-1 sm:gap-x-2 font-bold italic mt-3 sm:mt-4 md:mt-6 text-white border-l-2 border-white/30 pl-2 sm:pl-3 md:pl-4 lg:pl-6 leading-snug">
+              {"Combining frontend engineering + backend architecture + AI/ML systems to build intelligent, scalable digital products.".split(" ").map((word, i) => (
+                <span key={i} className="about-me-word opacity-0 inline-block translate-y-[100px]">{word}</span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
