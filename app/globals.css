@@ -121,16 +121,55 @@
   * {
     @apply border-border outline-ring/50;
   }
-  html, body {
+  html, body, #__next {
     @apply bg-background text-foreground;
     overflow-x: hidden;
     max-width: 100%;
+    height: auto;
+    min-height: 100dvh;
+    overscroll-behavior-y: auto;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
   }
 }
 
 @layer utilities {
   .bento-title {
-    @apply uppercase text-4xl font-black md:text-7xl;
+    @apply uppercase font-black md:text-7xl;
+    font-size: clamp(1.25rem, 5vw, 3.5rem);
+  }
+
+  /* Responsive type scaling for better mobile experience */
+  @media (max-width: 320px) {
+    h1, h2, h3, .bento-title, .font-canela, .font-general {
+      font-size: 0.85em;
+      letter-spacing: -0.5px;
+    }
+    .text-8xl { font-size: 2.25rem; }
+    .text-7xl { font-size: 1.875rem; }
+    .text-6xl { font-size: 1.5rem; }
+    .text-5xl { font-size: 1.25rem; }
+    p, span { font-size: 0.9em; }
+  }
+
+  @media (min-width: 321px) and (max-width: 430px) {
+    h1, h2, h3, .bento-title, .font-canela, .font-general {
+      font-size: 0.9em;
+    }
+    .text-8xl { font-size: 2.75rem; }
+    .text-7xl { font-size: 2.25rem; }
+    .text-6xl { font-size: 1.875rem; }
+    .text-5xl { font-size: 1.5rem; }
+  }
+
+  @media (min-width: 431px) and (max-width: 768px) {
+    h1, h2, h3, .bento-title, .font-canela, .font-general {
+      font-size: 0.95em;
+    }
+    .text-8xl { font-size: 3.25rem; }
+    .text-7xl { font-size: 2.75rem; }
+    .text-6xl { font-size: 2.25rem; }
+    .text-5xl { font-size: 1.875rem; }
   }
 
   .special-font b {
